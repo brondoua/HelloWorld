@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">App de connexion</string>
+    <string name="login" translatable="false">Identifiant</string>
+    <string name="pwd" translatable="false">Mot de passe</string>
+    <string name="connect">Se connecter</string>
+    <string name="drawapp">Appli de dessin</string>
+    <string name="ballapp">Appli de balle</string>
+    <string name="maxme">Nombre de points pour gagner (moi)</string>
+    <string name="maxyou">Nombre de points pour gagner(toi)</string>
+    <string name="velocityX">Vitesse X</string>
+    <string name="velocityY">Vitesse Y</string>
+</resources>

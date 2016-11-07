@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">HelloWorld</string>
+    <string name="title_activity_second">SecondActivity</string>
+    <string name="title_activity_inscription">InscriptionActivity</string>
+    <string name="pwd">Motdepasse</string>
+    <string name="login">login</string>
+
+</resources>
