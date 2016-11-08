@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">App de connexion</string>
-    <string name="login" translatable="false">Identifiant</string>
-    <string name="pwd" translatable="false">Mot de passe</string>
+    <string name="app_name">Mon application</string>
+    <string name="title_activity_inscription">Vous connecter</string>
+    <string name="welcome">Bonjour et bienvenue sur mon application, je vous prie de cliquer en dessous</string>
+    <string name="login">Identifiant</string>
+    <string name="pwd">Mot de passe</string>
     <string name="connect">Se connecter</string>
-    <string name="drawapp">Appli de dessin</string>
-    <string name="ballapp">Appli de balle</string>
+    <string name="drawapp">Dessiner</string>
+    <string name="ballapp">Jouer a la baballe</string>
     <string name="maxme">Nombre de points pour gagner (moi)</string>
-    <string name="maxyou">Nombre de points pour gagner(toi)</string>
     <string name="velocityX">Vitesse X</string>
     <string name="velocityY">Vitesse Y</string>
+    <string name="maxcom">Nombre de points pour gagner(ordinateur)</string>
+    <string name="scorecom">Score ordinateur</string>
+    <string name="scoreme">Mon score</string>
+    <string name="loose">PERDU !</string>
+    <string name="play">Jouer !</string>
+    <string name="playagain">Jouer de nouveau !</string>
 </resources>

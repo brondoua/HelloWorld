@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".InscriptionActivity" />
+        <activity android:name=".BallActivity" />
         <activity android:name=".Result" />
         <activity android:name=".DrawActivity" />
         <activity android:name=".WelcomeBallActivity" />

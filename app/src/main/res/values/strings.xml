@@ -1,18 +1,24 @@
 <resources>
-    <string name="app_name">Connect App</string>
-    <string name="title_activity_second">SecondActivity</string>
-    <string name="title_activity_inscription">InscriptionActivity</string>
+    <string name="app_name">My application</string>
+    <string name="title_activity_inscription">Sign up</string>
+    <string name="welcome">Hello and welcome in my application, please click below</string>
     <string name="pwd">Password</string>
-    <string name="login">login</string>
-    <string name="connect">connect</string>
+    <string name="login">Login</string>
+    <string name="connect">Connect</string>
     <string name="drawapp">Draw APP</string>
     <string name="ballapp">Moving ball APP</string>
     <string name="velocityX">Velocity X</string>
     <string name="velocityY">Velocity Y</string>
     <string name="maxme">Points to win for me</string>
-    <string name="maxyou">Points to win for you</string>
+    <string name="maxcom">Points to win for computer</string>
     <string name="title_activity_balltest">Balltest</string>
-    <string name="title_activity_ball_game">BallGame</string>
+    <string name="title_activity_ball_game" translatable="false">BallGame</string>
+    <string name="scoreme">Score me</string>
+    <string name="scorecom">Score com</string>
+    <string name="play">Play !</string>
+    <string name="win">You WIN !</string>
+    <string name="loose">You LOOSE !</string>
+    <string name="playagain">Play again!</string>
 
 
 </resources>

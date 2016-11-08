@@ -18,11 +18,12 @@ public class Result extends AppCompatActivity implements View.OnClickListener {
         String pwd=getIntent().getStringExtra("PWD");
         Log.i("TAG :",pwd);
         TextView display=(TextView) findViewById(R.id.text_result);
-        if(pwd.equals("passWD")==true){
+        if(pwd.equals("pwd")==true){
             display.setText("Connected!");
         }
-        else
-            display.setText("Not allowed to connect");
+        else {
+            display.setText("Not allowed to connect, you can't access the app");
+        }
         button_draw=(Button)findViewById(R.id.button_draw);
         button_draw.setOnClickListener(this);
         button_ball=(Button)findViewById(R.id.button_ball);

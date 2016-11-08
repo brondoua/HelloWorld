@@ -7,8 +7,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,21 +33,35 @@ public class BallCanvas extends View {
     private Handler h; // le handler permet de lancer des threads, des runnable avec un certain delai, il suffit donc de savoir ce qu'on met dans le thread
     private Runnable r;
     private GestureDetector mgd;
-    private Path path=null;
+    private Paint paint=null;
+    private Paint paint1=null;
     private int tailleraquetteX;
     private int tailleraquetteY;
-    TextView tv ;
+    private int maxpointme,maxpointcom,velocityx,velocityy;
+    //TextView textscoreme,textscoreyou;
+    int scoreme,scorecom;
+    //WelcomeBallActivity c=new WelcomeBallActivity();
 
 
 
 
-
-    public BallCanvas(Context context) {
+    public BallCanvas(Context context, String maxpointme, String maxpointcom, String velocityx, String velocityy) {
         super(context);
         mc=context; // on en profite on initialiser mc
         xballe=yballe=0;
         dxballe=dyballe=10;
         xraquette=0;
+        paint=new Paint();
+        paint.setAntiAlias(true);
+        paint.setStrokeWidth(15f);
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(20f);
+        paint1=new Paint();
+        paint1.setAntiAlias(true);
+        paint1.setStrokeWidth(15f);
+        paint1.setColor(Color.BLUE);
+        paint1.setTextSize(60f);
+        scoreme=scorecom=0;
         tailleraquetteX=tailleraquetteY=0;
         h=new Handler();
         r=new Runnable(){
@@ -55,6 +71,12 @@ public class BallCanvas extends View {
             }
         };
         mgd = new GestureDetector(mc,new mTouch1());
+        this.maxpointme=Integer.parseInt(maxpointme);
+        this.maxpointcom=Integer.parseInt(maxpointcom);
+        dxballe=this.velocityx=Integer.parseInt(velocityx);
+        dyballe=this.velocityy=Integer.parseInt(velocityy);
+
+
 
 
 
@@ -68,9 +90,33 @@ public class BallCanvas extends View {
 
 
         protected void onDraw(Canvas canvas){
-            // on recupere l'image de la balle
+            BitmapDrawable win = (BitmapDrawable)mc.getResources().getDrawable(R.drawable.win,null);
+            BitmapDrawable loose = (BitmapDrawable)mc.getResources().getDrawable(R.drawable.loose,null);
+            int t=100;
+            if(scoreme==maxpointme){
+                canvas.drawText("YOU WIN",getWidth()/4,getHeight()*3/4,paint1);
+                canvas.drawBitmap(win.getBitmap(),getWidth()/4,30,null);
+                t=scorecom;
 
-            
+
+            } else if(scorecom==maxpointcom){
+
+                canvas.drawText("YOU LOOSE",getWidth()/4,getHeight()*3/4,paint1);
+                canvas.drawBitmap(loose.getBitmap(),getWidth()/4,30,null);
+                t=scoreme;
+
+            }
+
+
+            // on recupere l'image de la balle
+            canvas.drawText("My score",0,getHeight()/2-20,paint);
+            canvas.drawText("Score com",getRight()-100,getHeight()/2-20,paint);
+            canvas.drawText("My score to win",0,50,paint);
+            canvas.drawText("Score com to win",getRight()-150,50,paint);
+            canvas.drawText(String.valueOf(maxpointme),0,70,paint);
+            canvas.drawText(String.valueOf(maxpointcom),getRight()-50,70,paint);
+            //textscoreme=(TextView) findViewById(R.id.scoreme);
+            //textscoreyou=(TextView) findViewById(R.id.scoreyou);
             BitmapDrawable raquette = (BitmapDrawable)mc.getResources().getDrawable(R.drawable.raquette,null);
             yraquette=getHeight()-raquette.getMinimumHeight();
             BitmapDrawable ball = (BitmapDrawable)mc.getResources().getDrawable(R.drawable.ball,null);// dans le getDrawable on donne l'identifiant & le theme, ici le theme nous interesse pas on met null
@@ -80,12 +126,26 @@ public class BallCanvas extends View {
             if(yballe+ball.getMinimumHeight()>=getBottom() || yballe<getTop() ){
                 //|| x-ball.getMinimumHeight()<=0
                 dyballe=-dyballe;
+
+                if(yballe+ball.getMinimumHeight()>=getBottom()) scorecom++;
             }
             // j'ai fait le choix de faire une autre boucle if pour cette condition afin d'être sur que la balle ira vers le haut
             //sinon lorsque je rate la balle, qu'elle touche le sol et que je pointe dessus, les coordonnées de xballe+taille balle sont superieur à yraquette et il renvoie la balle vers le bas
             if((dyballe>0 && yballe+ball.getMinimumHeight()>yraquette&& (xballe>xraquette &&xballe<xraquette+raquette.getMinimumWidth() ) )){
                 dyballe=-dyballe;
+                scoreme++;
             }
+            if( scoreme>maxpointme || (scoreme==maxpointme && scorecom>t)){
+                scorecom=0;
+                scoreme=0;
+            }
+            if( scorecom>maxpointcom || (scorecom==maxpointcom && scoreme>t)){
+                scorecom=0;
+            scoreme=0;
+        }
+
+
+
             xballe+=dxballe; //=getWidth()/2;
             yballe+=dyballe; //getHeight()/2;
             canvas.drawBitmap(ball.getBitmap(),xballe,yballe,null);
@@ -93,6 +153,10 @@ public class BallCanvas extends View {
             h.postDelayed(r,td); // au bout de 30 mili secondes il va lancer le run, relancer le invalidate, le invalidate va lancer le onDraw qui va ajouter d aux y & y et refaire le run & ainsi de siute;
             tailleraquetteX=raquette.getMinimumWidth();
             tailleraquetteY=raquette.getMinimumWidth();
+            canvas.drawText(String.valueOf(scoreme),0,getHeight()/2,paint);
+            canvas.drawText(String.valueOf(scorecom),getRight()-50,getHeight()/2,paint);
+            //textscoreyou.setText("1");
+
 
         }
     private class mTouch1 implements GestureDetector.OnGestureListener{
